@@ -1,0 +1,1297 @@
+{
+ "environment": {
+  "bind": "BIND 9.20.30 (Stable Release) <id:769c3fb>",
+  "cores": 14,
+  "curl": "curl 7.88.1",
+  "docker_server": "29.8.2",
+  "glibc_python_image": "ldd (Debian GLIBC 2.36-9+deb12u14) 2.36",
+  "go": "go version go1.23.12",
+  "host_arch": "arm64",
+  "image_arch": "linux/amd64 (emulated on arm64 hosts)",
+  "java": "openjdk version \"21.0.13\" 2026-10-20 LTS",
+  "python": "Python 3.12.16",
+  "unbound": "Version 1.22.0"
+ },
+ "experiments": {
+  "e1": {
+   "cases": [
+    {
+     "auth_queries": 2,
+     "behaviour": "honored",
+     "config": "default",
+     "delta_s": 0.25,
+     "expected_cache_s": 5,
+     "first_reply_ttl_s": 5,
+     "measured_cache_s": 5.255,
+     "pass": true,
+     "record_ttl_s": 5,
+     "resolver": "unbound"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "honored",
+     "config": "default",
+     "delta_s": 1.05,
+     "expected_cache_s": 20,
+     "first_reply_ttl_s": 20,
+     "measured_cache_s": 21.055,
+     "pass": true,
+     "record_ttl_s": 20,
+     "resolver": "unbound"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "clamped up",
+     "config": "min15",
+     "delta_s": 0.61,
+     "expected_cache_s": 15,
+     "first_reply_ttl_s": 15,
+     "measured_cache_s": 15.612,
+     "pass": true,
+     "record_ttl_s": 5,
+     "resolver": "unbound"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "clamped down",
+     "config": "max8",
+     "delta_s": 0.47,
+     "expected_cache_s": 8,
+     "first_reply_ttl_s": 8,
+     "measured_cache_s": 8.47,
+     "pass": true,
+     "record_ttl_s": 20,
+     "resolver": "unbound"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "honored",
+     "config": "default",
+     "delta_s": -0.76,
+     "expected_cache_s": 5,
+     "first_reply_ttl_s": 5,
+     "measured_cache_s": 4.242,
+     "pass": true,
+     "record_ttl_s": 5,
+     "resolver": "bind"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "honored",
+     "config": "default",
+     "delta_s": 0.02,
+     "expected_cache_s": 20,
+     "first_reply_ttl_s": 20,
+     "measured_cache_s": 20.023,
+     "pass": true,
+     "record_ttl_s": 20,
+     "resolver": "bind"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "clamped up",
+     "config": "min15",
+     "delta_s": -0.01,
+     "expected_cache_s": 15,
+     "first_reply_ttl_s": 15,
+     "measured_cache_s": 14.993,
+     "pass": true,
+     "record_ttl_s": 5,
+     "resolver": "bind"
+    },
+    {
+     "auth_queries": 2,
+     "behaviour": "clamped down",
+     "config": "max8",
+     "delta_s": 0.09,
+     "expected_cache_s": 8,
+     "first_reply_ttl_s": 8,
+     "measured_cache_s": 8.094,
+     "pass": true,
+     "record_ttl_s": 20,
+     "resolver": "bind"
+    }
+   ],
+   "title": "TTL honored or clamped by the resolver",
+   "tolerance": "measured minus expected within -1.2 s to +1.5 s (poll step 0.2 s, TTL counted in whole seconds so a cache may drop an entry up to one second early, emulated CPU)"
+  },
+  "e2": {
+   "cases": [
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "default",
+     "delta_s": 0.67,
+     "expected_negative_s": 8,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 8.672,
+     "pass": true,
+     "resolver": "unbound",
+     "soa_minimum_s": 8,
+     "soa_ttl_s": 8,
+     "ttl_on_first_nxdomain_s": 8
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "default",
+     "delta_s": 0.85,
+     "expected_negative_s": 6,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 6.85,
+     "pass": true,
+     "resolver": "unbound",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 30,
+     "ttl_on_first_nxdomain_s": 6
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "uncapped",
+     "config": "default",
+     "delta_s": 1.06,
+     "expected_negative_s": 6,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 7.064,
+     "pass": true,
+     "resolver": "unbound",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 30,
+     "ttl_on_first_nxdomain_s": 6
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "uncapped",
+     "config": "default",
+     "delta_s": 0.86,
+     "expected_negative_s": 6,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 6.855,
+     "pass": true,
+     "resolver": "unbound",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 60,
+     "ttl_on_first_nxdomain_s": 6
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "maxneg3",
+     "delta_s": 0.63,
+     "expected_negative_s": 3,
+     "follows": "resolver cap",
+     "measured_negative_s": 3.628,
+     "pass": true,
+     "resolver": "unbound",
+     "soa_minimum_s": 20,
+     "soa_ttl_s": 20,
+     "ttl_on_first_nxdomain_s": 3
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "default",
+     "delta_s": -0.14,
+     "expected_negative_s": 8,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 7.862,
+     "pass": true,
+     "resolver": "bind",
+     "soa_minimum_s": 8,
+     "soa_ttl_s": 8,
+     "ttl_on_first_nxdomain_s": 8
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "default",
+     "delta_s": -0.15,
+     "expected_negative_s": 6,
+     "follows": "min(TTL, MINIMUM)",
+     "measured_negative_s": 5.847,
+     "pass": true,
+     "resolver": "bind",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 30,
+     "ttl_on_first_nxdomain_s": 6
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "uncapped",
+     "config": "default",
+     "delta_s": 24.11,
+     "expected_negative_s": 6,
+     "follows": "wire SOA TTL",
+     "measured_negative_s": 30.11,
+     "pass": false,
+     "resolver": "bind",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 30,
+     "ttl_on_first_nxdomain_s": 30
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "uncapped",
+     "config": "default",
+     "delta_s": 53.8,
+     "expected_negative_s": 6,
+     "follows": "wire SOA TTL",
+     "measured_negative_s": 59.801,
+     "pass": false,
+     "resolver": "bind",
+     "soa_minimum_s": 6,
+     "soa_ttl_s": 60,
+     "ttl_on_first_nxdomain_s": 60
+    },
+    {
+     "auth_queries": 2,
+     "auth_soa_mode": "capped",
+     "config": "maxneg3",
+     "delta_s": -0.35,
+     "expected_negative_s": 3,
+     "follows": "resolver cap",
+     "measured_negative_s": 2.654,
+     "pass": true,
+     "resolver": "bind",
+     "soa_minimum_s": 20,
+     "soa_ttl_s": 20,
+     "ttl_on_first_nxdomain_s": 3
+    }
+   ],
+   "title": "Negative caching duration",
+   "tolerance": "measured minus expected within -1.2 s to +1.5 s; expected is min(SOA TTL, SOA MINIMUM), then the resolver cap if configured"
+  },
+  "e3": {
+   "cases": [
+    {
+     "after_recovery_rcode": -1,
+     "config": "default",
+     "expected": "no stale answers after the 5 s TTL",
+     "failure_rcodes": [
+      -1,
+      2
+     ],
+     "first_failure_s": 5.01,
+     "last_success_s": 4.01,
+     "max_failure_latency_ms": 6012,
+     "pass": true,
+     "polls_failed": 9,
+     "polls_ok": 5,
+     "resolver": "unbound",
+     "served_stale": false,
+     "stale_reply_ttls_s": []
+    },
+    {
+     "after_recovery_rcode": -1,
+     "config": "stale",
+     "expected": "stale answers until about 20 s (5 s TTL + 15 s stale window)",
+     "failure_rcodes": [
+      -1
+     ],
+     "first_failure_s": 21.09,
+     "last_success_s": 20.09,
+     "max_failure_latency_ms": 6007,
+     "pass": true,
+     "polls_failed": 1,
+     "polls_ok": 21,
+     "resolver": "unbound",
+     "served_stale": true,
+     "stale_reply_ttls_s": [
+      30
+     ]
+    },
+    {
+     "after_recovery_rcode": 2,
+     "config": "default",
+     "expected": "no stale answers after the 5 s TTL",
+     "failure_rcodes": [
+      -1,
+      2
+     ],
+     "first_failure_s": 5.03,
+     "last_success_s": 4.03,
+     "max_failure_latency_ms": 6011,
+     "pass": true,
+     "polls_failed": 6,
+     "polls_ok": 5,
+     "resolver": "bind",
+     "served_stale": false,
+     "stale_reply_ttls_s": []
+    },
+    {
+     "after_recovery_rcode": 0,
+     "config": "stale",
+     "expected": "stale answers until about 20 s (5 s TTL + 15 s stale window)",
+     "failure_rcodes": [
+      -1
+     ],
+     "first_failure_s": 5.01,
+     "last_success_s": 19.05,
+     "max_failure_latency_ms": 6009,
+     "pass": true,
+     "polls_failed": 2,
+     "polls_ok": 11,
+     "resolver": "bind",
+     "served_stale": true,
+     "stale_reply_ttls_s": [
+      30
+     ]
+    }
+   ],
+   "title": "Serve-stale during an authoritative outage",
+   "tolerance": "default: no success after 6.5 s; serve-stale: last success between 17 s and 22.5 s (client-side wait before a stale answer is up to 1.8 s)"
+  },
+  "e4": {
+   "cases": [
+    {
+     "delta_s": 0.0,
+     "expected_cutover_s": 0.0,
+     "flip_after_fill_s": 0.0,
+     "flip_at_fraction_of_ttl": 0.0,
+     "measured_cutover_s": 0.0,
+     "pass": true,
+     "record_ttl_s": 0,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.47,
+     "expected_cutover_s": 2.7,
+     "flip_after_fill_s": 0.3,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 3.17,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.9,
+     "expected_cutover_s": 1.49,
+     "flip_after_fill_s": 1.51,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 2.392,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.96,
+     "expected_cutover_s": 0.3,
+     "flip_after_fill_s": 2.7,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 1.258,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.94,
+     "expected_cutover_s": 5.4,
+     "flip_after_fill_s": 0.6,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 6.338,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.92,
+     "expected_cutover_s": 3.0,
+     "flip_after_fill_s": 3.0,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 3.92,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.96,
+     "expected_cutover_s": 0.59,
+     "flip_after_fill_s": 5.41,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 1.551,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.95,
+     "expected_cutover_s": 10.79,
+     "flip_after_fill_s": 1.21,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 11.737,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.93,
+     "expected_cutover_s": 6.0,
+     "flip_after_fill_s": 6.0,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 6.927,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.89,
+     "expected_cutover_s": 1.2,
+     "flip_after_fill_s": 10.8,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 2.089,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.0,
+     "expected_cutover_s": 0.0,
+     "flip_after_fill_s": 0.0,
+     "flip_at_fraction_of_ttl": 0.0,
+     "measured_cutover_s": 0.003,
+     "pass": true,
+     "record_ttl_s": 0,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.69,
+     "expected_cutover_s": 2.7,
+     "flip_after_fill_s": 0.3,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 2.012,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.08,
+     "expected_cutover_s": 1.5,
+     "flip_after_fill_s": 1.5,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 1.424,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.09,
+     "expected_cutover_s": 0.3,
+     "flip_after_fill_s": 2.7,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 0.21,
+     "pass": true,
+     "record_ttl_s": 3,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.05,
+     "expected_cutover_s": 5.39,
+     "flip_after_fill_s": 0.61,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 5.337,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.08,
+     "expected_cutover_s": 2.99,
+     "flip_after_fill_s": 3.01,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 2.911,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.07,
+     "expected_cutover_s": 0.59,
+     "flip_after_fill_s": 5.41,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 0.52,
+     "pass": true,
+     "record_ttl_s": 6,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": 0.01,
+     "expected_cutover_s": 10.79,
+     "flip_after_fill_s": 1.21,
+     "flip_at_fraction_of_ttl": 0.1,
+     "measured_cutover_s": 10.802,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.09,
+     "expected_cutover_s": 6.0,
+     "flip_after_fill_s": 6.0,
+     "flip_at_fraction_of_ttl": 0.5,
+     "measured_cutover_s": 5.912,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.05,
+     "expected_cutover_s": 1.2,
+     "flip_after_fill_s": 10.8,
+     "flip_at_fraction_of_ttl": 0.9,
+     "measured_cutover_s": 1.147,
+     "pass": true,
+     "record_ttl_s": 12,
+     "resolver": "bind"
+    }
+   ],
+   "title": "Failover cutover time as a function of TTL",
+   "tolerance": "measured minus expected within -1.2 s to +1.5 s; expected = TTL minus actual time since the cache fill"
+  },
+  "e5": {
+   "cases": [
+    {
+     "delta_s": 0.74,
+     "expected_stale_window_s": 19.0,
+     "measured_stale_window_s": 19.739,
+     "mode": "baseline",
+     "pass": true,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.88,
+     "expected_stale_window_s": 18.0,
+     "measured_stale_window_s": 18.883,
+     "mode": "lower_late",
+     "pass": true,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": 0.39,
+     "expected_stale_window_s": 1.5,
+     "measured_stale_window_s": 1.885,
+     "mode": "lower_ahead",
+     "pass": true,
+     "resolver": "unbound"
+    },
+    {
+     "delta_s": -0.25,
+     "expected_stale_window_s": 19.0,
+     "measured_stale_window_s": 18.751,
+     "mode": "baseline",
+     "pass": true,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.03,
+     "expected_stale_window_s": 18.0,
+     "measured_stale_window_s": 17.966,
+     "mode": "lower_late",
+     "pass": true,
+     "resolver": "bind"
+    },
+    {
+     "delta_s": -0.56,
+     "expected_stale_window_s": 1.5,
+     "measured_stale_window_s": 0.94,
+     "mode": "lower_ahead",
+     "pass": true,
+     "resolver": "bind"
+    }
+   ],
+   "title": "Stale-record window after a change, with TTL lowered late or ahead",
+   "tolerance": "measured minus expected within -1.2 s to +1.5 s; old TTL 20 s, new TTL 2 s"
+  },
+  "e6": {
+   "cases": [
+    {
+     "change_after_first_lookup_s": 3.59,
+     "client_cache_s": "none",
+     "errors": 0,
+     "expected": "switch within 3.5 s of the change (resolver TTL 2 s + poll step)",
+     "first_request_on_new_address_s": 2.45,
+     "last_request_on_old_address_s": 1.95,
+     "pass": true,
+     "requests": 31,
+     "runtime": "python",
+     "variant": "fresh"
+    },
+    {
+     "change_after_first_lookup_s": 3.57,
+     "client_cache_s": "none",
+     "errors": 0,
+     "expected": "switch within 3.5 s of the change (resolver TTL 2 s + poll step)",
+     "first_request_on_new_address_s": 1.97,
+     "last_request_on_old_address_s": 1.46,
+     "pass": true,
+     "requests": 31,
+     "runtime": "go-pure",
+     "variant": "fresh"
+    },
+    {
+     "change_after_first_lookup_s": 3.56,
+     "client_cache_s": "none",
+     "errors": 0,
+     "expected": "switch within 3.5 s of the change (resolver TTL 2 s + poll step)",
+     "first_request_on_new_address_s": 2.48,
+     "last_request_on_old_address_s": 1.98,
+     "pass": true,
+     "requests": 31,
+     "runtime": "go-cgo",
+     "variant": "fresh"
+    },
+    {
+     "change_after_first_lookup_s": 3.61,
+     "client_cache_s": "none",
+     "errors": 0,
+     "expected": "switch within 3.5 s of the change (resolver TTL 2 s + poll step)",
+     "first_request_on_new_address_s": 1.94,
+     "last_request_on_old_address_s": 1.44,
+     "pass": true,
+     "requests": 31,
+     "runtime": "curl",
+     "variant": "fresh"
+    },
+    {
+     "change_after_first_lookup_s": 3.56,
+     "client_cache_s": 60.0,
+     "errors": 0,
+     "expected": "switch at about 56.44 s (client cache 60.0 s minus 3.56 s already elapsed)",
+     "first_request_on_new_address_s": 55.98,
+     "last_request_on_old_address_s": 55.48,
+     "pass": true,
+     "requests": 151,
+     "runtime": "curl",
+     "variant": "long"
+    },
+    {
+     "change_after_first_lookup_s": 3.57,
+     "client_cache_s": 30.0,
+     "errors": 0,
+     "expected": "switch at about 26.43 s (client cache 30.0 s minus 3.57 s already elapsed)",
+     "first_request_on_new_address_s": 26.61,
+     "last_request_on_old_address_s": 26.11,
+     "pass": true,
+     "requests": 91,
+     "runtime": "java",
+     "variant": "default"
+    },
+    {
+     "change_after_first_lookup_s": 3.58,
+     "client_cache_s": "none",
+     "errors": 0,
+     "expected": "switch within 3.5 s of the change (resolver TTL 2 s + poll step)",
+     "first_request_on_new_address_s": 1.93,
+     "last_request_on_old_address_s": 1.43,
+     "pass": true,
+     "requests": 31,
+     "runtime": "java",
+     "variant": "ttl0"
+    },
+    {
+     "change_after_first_lookup_s": 3.61,
+     "client_cache_s": 5.0,
+     "errors": 0,
+     "expected": "switch at about 1.39 s (client cache 5.0 s minus 3.61 s already elapsed)",
+     "first_request_on_new_address_s": 1.42,
+     "last_request_on_old_address_s": 0.91,
+     "pass": true,
+     "requests": 41,
+     "runtime": "java",
+     "variant": "ttl5"
+    },
+    {
+     "change_after_first_lookup_s": 3.58,
+     "client_cache_s": "forever",
+     "errors": 0,
+     "expected": "never switches during the run",
+     "first_request_on_new_address_s": null,
+     "last_request_on_old_address_s": 41.58,
+     "pass": true,
+     "requests": 91,
+     "runtime": "java",
+     "variant": "ttlinf"
+    }
+   ],
+   "title": "Client runtimes: how long the old address stays in use after the record changed",
+   "tolerance": "times are seconds after the change; record TTL 2 s, requests every 0.5 s on a new connection each time; cached runtimes within -1.2 s to +1.5 s of cache lifetime minus time already elapsed"
+  },
+  "e7": {
+   "cases": [
+    {
+     "address_order_seen": [
+      "refusing",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.02,
+     "expected": "next address within 1.5 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 3.02,
+     "expected": "success within the connect timeout (3.0 s) plus 1 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": null,
+     "expected": "success within the 20.0 s cap",
+     "family": "v4",
+     "outcome": "error:cap",
+     "pass": false,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "refusing"
+      ],
+      [
+       0.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.0,
+     "expected": "next address within 1.5 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       2.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 2.0,
+     "expected": "success within the connect timeout (3.0 s) plus 1 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       15.01,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 15.01,
+     "expected": "success within the 20.0 s cap",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "refusing"
+      ],
+      [
+       0.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.0,
+     "expected": "next address within 1.5 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       2.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 2.0,
+     "expected": "success within the connect timeout (3.0 s) plus 1 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       15.02,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 15.02,
+     "expected": "success within the 20.0 s cap",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "refusing",
+      "new"
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.21,
+     "expected": "next address within 1.5 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "blackhole",
+      "new"
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 2.51,
+     "expected": "success within the connect timeout (3.0 s) plus 1 s",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "blackhole",
+      "new"
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 11.01,
+     "expected": "success within the 20.0 s cap",
+     "family": "v4",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": [
+      "refusing",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.01,
+     "expected": "next address within 1.5 s",
+     "family": "v4",
+     "outcome": "error:ConnectException",
+     "pass": false,
+     "runtime": "java"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 3.02,
+     "expected": "success within the connect timeout (3.0 s) plus 1 s",
+     "family": "v4",
+     "outcome": "error:SocketTimeoutException",
+     "pass": false,
+     "runtime": "java"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 20.01,
+     "expected": "success within the 20.0 s cap",
+     "family": "v4",
+     "outcome": "error:cap",
+     "pass": false,
+     "runtime": "java"
+    },
+    {
+     "address_order_seen": [
+      "refusing",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.02,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": null,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 3.02,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": null,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": [
+      "blackhole",
+      "new"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": null,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "error:cap",
+     "pass": null,
+     "runtime": "python"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "refusing"
+      ],
+      [
+       0.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.0,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       0.3,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.3,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       0.3,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.3,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-pure"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "refusing"
+      ],
+      [
+       0.0,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.0,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       0.31,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.31,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      [
+       0.0,
+       "blackhole"
+      ],
+      [
+       0.3,
+       "new"
+      ]
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.3,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "go-cgo"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "refusing",
+      "new"
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.01,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "blackhole",
+      "new"
+     ],
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.21,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": null,
+     "attempts": [
+      "blackhole",
+      "new"
+     ],
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.2,
+     "expected": "Happy Eyeballs (RFC 8305): live family within 2 s (the largest delay the RFC allows)",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": true,
+     "runtime": "curl"
+    },
+    {
+     "address_order_seen": [
+      "new",
+      "2001:db8:77:1:0:0:0:23"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "refused",
+     "elapsed_s": 0.02,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": null,
+     "runtime": "java"
+    },
+    {
+     "address_order_seen": [
+      "new",
+      "2001:db8:77:1:0:0:0:24"
+     ],
+     "attempts": null,
+     "connect_timeout_s": 3.0,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.01,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": null,
+     "runtime": "java"
+    },
+    {
+     "address_order_seen": [
+      "new",
+      "2001:db8:77:1:0:0:0:24"
+     ],
+     "attempts": null,
+     "connect_timeout_s": null,
+     "dead_mode": "blackhole",
+     "elapsed_s": 0.01,
+     "expected": "no Happy Eyeballs implementation expected; reported as found",
+     "family": "v6",
+     "outcome": "connected to the live address",
+     "pass": null,
+     "runtime": "java"
+    }
+   ],
+   "title": "Two addresses, the first dead: client fallback",
+   "tolerance": "v4 rows: the dead address is listed first; v6 rows: the AAAA is dead and the A is alive. Elapsed time includes client process start for curl. Runtimes without Happy Eyeballs have no pass or fail"
+  },
+  "e8": {
+   "cases": [
+    {
+     "child_ns_ttl_s": 30,
+     "expected_if_child_centric_s": 28.99,
+     "expected_if_parent_centric_s": 4.99,
+     "follows": "child NS TTL",
+     "measured_switch_s": 30.154,
+     "parent_ns_ttl_s": 6,
+     "pass": true,
+     "resolver": "unbound"
+    },
+    {
+     "child_ns_ttl_s": 6,
+     "expected_if_child_centric_s": 5.0,
+     "expected_if_parent_centric_s": 29.0,
+     "follows": "child NS TTL",
+     "measured_switch_s": 5.017,
+     "parent_ns_ttl_s": 30,
+     "pass": true,
+     "resolver": "unbound"
+    },
+    {
+     "child_ns_ttl_s": 30,
+     "expected_if_child_centric_s": 28.99,
+     "expected_if_parent_centric_s": 4.99,
+     "follows": "parent NS TTL",
+     "measured_switch_s": 5.017,
+     "parent_ns_ttl_s": 6,
+     "pass": true,
+     "resolver": "bind"
+    },
+    {
+     "child_ns_ttl_s": 6,
+     "expected_if_child_centric_s": 4.99,
+     "expected_if_parent_centric_s": 28.99,
+     "follows": "parent NS TTL",
+     "measured_switch_s": 29.132,
+     "parent_ns_ttl_s": 30,
+     "pass": true,
+     "resolver": "bind"
+    }
+   ],
+   "title": "Delegation change: which NS TTL the resolver follows",
+   "tolerance": "switch time measured from the parent change, polling once a second with fresh names; a case passes when the switch matches the parent or the child expectation within -1.2 s to +1.5 s, a row that matches neither is a finding"
+  }
+ },
+ "summary": {
+  "cases": 85,
+  "within_tolerance": 79
+ }
+}
