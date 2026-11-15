@@ -30,7 +30,7 @@ GitHub's "Cite this repository" button reads `CITATION.cff`.
 
 <!-- end generated header -->
 
-The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.3 (draft). Release tag: v0.1.3. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
+The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.4 (draft). Release tag: v0.1.4. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
 
 ## Contents
 
