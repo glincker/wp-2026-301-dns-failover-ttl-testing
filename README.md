@@ -1,6 +1,6 @@
 # GLINR-WP-2026-301: experiments and claims
 
-The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.0 (draft). Release tag: v0.1.0. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
+The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.1 (draft). Release tag: v0.1.1. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
 
 ## Contents
 
