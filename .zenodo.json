@@ -24,10 +24,10 @@
   ],
   "license": "cc-by-4.0",
   "language": "eng",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "related_identifiers": [
     {
-      "identifier": "https://glinr.com/wp/2026-301",
+      "identifier": "https://glinr.com/research/2026-301-dns-in-production",
       "relation": "isSupplementTo",
       "scheme": "url"
     },

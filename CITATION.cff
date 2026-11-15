@@ -8,9 +8,9 @@ authors:
     orcid: "https://orcid.org/0009-0002-0579-6514"
     website: "https://thegdsks.com"
 repository-code: "https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing"
-url: "https://glinr.com/wp/2026-301"
+url: "https://glinr.com/research/2026-301-dns-in-production"
 license: MIT
-version: 0.1.3
+version: 0.1.4
 date-released: 2026-11-11
 keywords:
   - DNS TTL
@@ -35,5 +35,5 @@ preferred-citation:
     name: "GLINR Studios"
   number: "GLINR-WP-2026-301"
   year: 2026
-  url: "https://glinr.com/wp/2026-301"
+  url: "https://glinr.com/research/2026-301-dns-in-production"
   doi: 10.5281/zenodo.24238986
