@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this evidence or cite the paper, please cite it as below."
+title: "GLINR-WP-2026-301: experiments and claims for DNS in Production"
+type: dataset
+authors:
+  - family-names: Singh
+    given-names: Gagan Deep
+    orcid: "https://orcid.org/0009-0002-0579-6514"
+    website: "https://thegdsks.com"
+repository-code: "https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing"
+url: "https://glinr.com/wp/2026-301"
+license: MIT
+version: 0.1.2
+date-released: 2026-11-11
+keywords:
+  - DNS TTL
+  - DNS failover
+  - negative caching
+  - serve-stale
+  - resolver TTL clamping
+  - DNS cutover time
+  - client DNS caching
+  - delegation
+  - RFC 2308
+  - RFC 8767
+doi: 10.5281/zenodo.24238986
+preferred-citation:
+  type: report
+  title: "DNS in Production"
+  authors:
+    - family-names: Singh
+      given-names: Gagan Deep
+      orcid: "https://orcid.org/0009-0002-0579-6514"
+  institution:
+    name: "GLINR Studios"
+  number: "GLINR-WP-2026-301"
+  year: 2026
+  url: "https://glinr.com/wp/2026-301"
+  doi: 10.5281/zenodo.24238986
