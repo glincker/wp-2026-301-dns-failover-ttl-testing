@@ -10,7 +10,7 @@ authors:
 repository-code: "https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing"
 url: "https://glinr.com/wp/2026-301"
 license: MIT
-version: 0.1.2
+version: 0.1.3
 date-released: 2026-11-11
 keywords:
   - DNS TTL

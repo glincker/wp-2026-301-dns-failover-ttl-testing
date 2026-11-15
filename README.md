@@ -5,7 +5,7 @@ TTLs, failover and failure modes, measured in two resolvers and four client runt
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24238986.svg)](https://doi.org/10.5281/zenodo.24238986)
 [![Release](https://img.shields.io/github/v/release/glincker/wp-2026-301-dns-failover-ttl-testing?display_name=tag)](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/releases/latest)
-[![Paper PDF](https://img.shields.io/badge/paper-PDF-orange)](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/releases/download/v0.1.2/GLINR-WP-2026-301-v0.1.2.pdf)
+[![Paper PDF](https://img.shields.io/badge/paper-PDF-orange)](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/releases/download/v0.1.3/GLINR-WP-2026-301-v0.1.3.pdf)
 [![Code license: MIT](https://img.shields.io/badge/code-MIT-blue)](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/blob/HEAD/LICENSE)
 [![Text and data license: CC BY 4.0](https://img.shields.io/badge/text%20and%20data-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Status](https://img.shields.io/badge/status-draft-yellow)](https://glinr.com/wp/2026-301)
@@ -13,8 +13,8 @@ TTLs, failover and failure modes, measured in two resolvers and four client runt
 
 | | |
 | --- | --- |
-| Report | GLINR-WP-2026-301, version 0.1.2 (draft) |
-| Paper (PDF) | [GLINR-WP-2026-301-v0.1.2.pdf](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/releases/download/v0.1.2/GLINR-WP-2026-301-v0.1.2.pdf) |
+| Report | GLINR-WP-2026-301, version 0.1.3 (draft) |
+| Paper (PDF) | [GLINR-WP-2026-301-v0.1.3.pdf](https://github.com/glincker/wp-2026-301-dns-failover-ttl-testing/releases/download/v0.1.3/GLINR-WP-2026-301-v0.1.3.pdf) |
 | Paper page | [glinr.com/wp/2026-301](https://glinr.com/wp/2026-301) |
 | DOI | [10.5281/zenodo.24238986](https://doi.org/10.5281/zenodo.24238986) (always resolves to the latest version) |
 | Author | [Gagan Deep Singh](https://thegdsks.com), [ORCID](https://orcid.org/0009-0002-0579-6514) |
@@ -24,13 +24,13 @@ TTLs, failover and failure modes, measured in two resolvers and four client runt
 
 ## Cite this work
 
-Gagan Deep Singh. *DNS in Production.* GLINR Studios, 2026. GLINR-WP-2026-301, version 0.1.2. https://doi.org/10.5281/zenodo.24238986
+Gagan Deep Singh. *DNS in Production.* GLINR Studios, 2026. GLINR-WP-2026-301, version 0.1.3. https://doi.org/10.5281/zenodo.24238986
 
 GitHub's "Cite this repository" button reads `CITATION.cff`.
 
 <!-- end generated header -->
 
-The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.2 (draft). Release tag: v0.1.2. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
+The evidence behind "DNS in Production", a whitepaper on DNS TTLs, failover and failure modes by Gagan Deep Singh (GLINR Studios). The paper is GLINR-WP-2026-301, version 0.1.3 (draft). Release tag: v0.1.3. This repository holds the harness that was run, its results and the claims the paper rests on, so that you can check them.
 
 ## Contents
 
